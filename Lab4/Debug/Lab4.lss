@@ -1,0 +1,238 @@
+
+Lab4.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000001d2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000015e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  000001d2  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000001d2  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000204  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000030  00000000  00000000  00000244  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000715  00000000  00000000  00000274  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000660  00000000  00000000  00000989  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000002a1  00000000  00000000  00000fe9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000060  00000000  00000000  0000128c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000038d  00000000  00000000  000012ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000b7  00000000  00000000  00001679  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000020  00000000  00000000  00001730  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 77 00 	jmp	0xee	; 0xee <__vector_4>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 30       	cpi	r26, 0x02	; 2
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 61 00 	call	0xc2	; 0xc2 <main>
+  88:	0c 94 ad 00 	jmp	0x15a	; 0x15a <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <setup>:
+		PORTB = valor_portb;
+    }
+}
+
+void setup(void){
+	DDRD |= 0xFC;
+  90:	8a b1       	in	r24, 0x0a	; 10
+  92:	8c 6f       	ori	r24, 0xFC	; 252
+  94:	8a b9       	out	0x0a, r24	; 10
+	PORTD |= 0xFC;
+  96:	8b b1       	in	r24, 0x0b	; 11
+  98:	8c 6f       	ori	r24, 0xFC	; 252
+  9a:	8b b9       	out	0x0b, r24	; 11
+	DDRB |= 0x1F;
+  9c:	84 b1       	in	r24, 0x04	; 4
+  9e:	8f 61       	ori	r24, 0x1F	; 31
+  a0:	84 b9       	out	0x04, r24	; 4
+	PORTB |= 0x0F;
+  a2:	85 b1       	in	r24, 0x05	; 5
+  a4:	8f 60       	ori	r24, 0x0F	; 15
+  a6:	85 b9       	out	0x05, r24	; 5
+	DDRC = 0x00;
+  a8:	17 b8       	out	0x07, r1	; 7
+	PCMSK1 |= 0x03;
+  aa:	ec e6       	ldi	r30, 0x6C	; 108
+  ac:	f0 e0       	ldi	r31, 0x00	; 0
+  ae:	80 81       	ld	r24, Z
+  b0:	83 60       	ori	r24, 0x03	; 3
+  b2:	80 83       	st	Z, r24
+	PCICR |= (1 << PCIE1);
+  b4:	e8 e6       	ldi	r30, 0x68	; 104
+  b6:	f0 e0       	ldi	r31, 0x00	; 0
+  b8:	80 81       	ld	r24, Z
+  ba:	82 60       	ori	r24, 0x02	; 2
+  bc:	80 83       	st	Z, r24
+	sei();
+  be:	78 94       	sei
+  c0:	08 95       	ret
+
+000000c2 <main>:
+void setup(void);
+
+
+int main(void)
+{
+    setup();
+  c2:	0e 94 48 00 	call	0x90	; 0x90 <setup>
+    while (1) 
+    {
+		uint16_t valor_para_display = valor_contador;
+  c6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  ca:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+		uint8_t valor_portb = 0;
+		uint8_t valor_portd = 0;
+		valor_para_display <<= 2;
+  ce:	88 0f       	add	r24, r24
+  d0:	99 1f       	adc	r25, r25
+  d2:	88 0f       	add	r24, r24
+  d4:	99 1f       	adc	r25, r25
+		valor_portd = ~(valor_portd | valor_para_display);
+  d6:	28 2f       	mov	r18, r24
+  d8:	20 95       	com	r18
+		valor_para_display >>= 8;
+		valor_portb = (~(valor_portb | valor_para_display) & 0x03); // 0b0000_0011
+  da:	89 2f       	mov	r24, r25
+  dc:	80 95       	com	r24
+  de:	98 2f       	mov	r25, r24
+  e0:	93 70       	andi	r25, 0x03	; 3
+		valor_portb = (PORTB & 0xFC)| valor_portb;
+  e2:	85 b1       	in	r24, 0x05	; 5
+  e4:	8c 7f       	andi	r24, 0xFC	; 252
+  e6:	89 2b       	or	r24, r25
+		PORTD = valor_portd;
+  e8:	2b b9       	out	0x0b, r18	; 11
+		PORTB = valor_portb;
+  ea:	85 b9       	out	0x05, r24	; 5
+  ec:	ec cf       	rjmp	.-40     	; 0xc6 <main+0x4>
+
+000000ee <__vector_4>:
+	PCMSK1 |= 0x03;
+	PCICR |= (1 << PCIE1);
+	sei();
+}
+
+ISR(PCINT1_vect){
+  ee:	1f 92       	push	r1
+  f0:	0f 92       	push	r0
+  f2:	0f b6       	in	r0, 0x3f	; 63
+  f4:	0f 92       	push	r0
+  f6:	11 24       	eor	r1, r1
+  f8:	2f 93       	push	r18
+  fa:	8f 93       	push	r24
+  fc:	9f 93       	push	r25
+	if (!(PINC & (1 << PINC0))) // Decrementar
+  fe:	30 99       	sbic	0x06, 0	; 6
+ 100:	12 c0       	rjmp	.+36     	; 0x126 <__vector_4+0x38>
+	{
+		valor_contador -= 1;
+ 102:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 106:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 10a:	01 97       	sbiw	r24, 0x01	; 1
+ 10c:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 110:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+		if (valor_contador == -1) {
+ 114:	01 96       	adiw	r24, 0x01	; 1
+ 116:	c9 f4       	brne	.+50     	; 0x14a <__vector_4+0x5c>
+			valor_contador = 255;
+ 118:	8f ef       	ldi	r24, 0xFF	; 255
+ 11a:	90 e0       	ldi	r25, 0x00	; 0
+ 11c:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 120:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 124:	12 c0       	rjmp	.+36     	; 0x14a <__vector_4+0x5c>
+		}
+	} 
+	else if (!(PINC & (1 << PINC1))) // Incrementar
+ 126:	31 99       	sbic	0x06, 1	; 6
+ 128:	10 c0       	rjmp	.+32     	; 0x14a <__vector_4+0x5c>
+	{
+		valor_contador += 1;
+ 12a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 12e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 132:	01 96       	adiw	r24, 0x01	; 1
+ 134:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 138:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+		if (valor_contador == 256) {
+ 13c:	81 15       	cp	r24, r1
+ 13e:	91 40       	sbci	r25, 0x01	; 1
+ 140:	21 f4       	brne	.+8      	; 0x14a <__vector_4+0x5c>
+			valor_contador = 0;
+ 142:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 146:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+		}
+	}
+}
+ 14a:	9f 91       	pop	r25
+ 14c:	8f 91       	pop	r24
+ 14e:	2f 91       	pop	r18
+ 150:	0f 90       	pop	r0
+ 152:	0f be       	out	0x3f, r0	; 63
+ 154:	0f 90       	pop	r0
+ 156:	1f 90       	pop	r1
+ 158:	18 95       	reti
+
+0000015a <_exit>:
+ 15a:	f8 94       	cli
+
+0000015c <__stop_program>:
+ 15c:	ff cf       	rjmp	.-2      	; 0x15c <__stop_program>
