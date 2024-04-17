@@ -74,6 +74,14 @@ int main(void)
 			PORTD = valor_portd;
 			PORTB = valor_portb;
 		}
+		if (valor_pot>valor_contador)
+		{
+			PORTB |= (1<<PORTB5);
+		} 
+		else
+		{
+			PORTB &= ~(1<<PORTB5);
+		}
     }
 }
 
@@ -113,8 +121,8 @@ void setup(void){
 	cli();
 	DDRD |= 0xFC;
 	PORTD |= 0xFC;
-	DDRB |= 0x1F;
-	PORTB |= 0x0F;
+	DDRB |= 0x3F; // 0b0011_1111
+	PORTB |= 0x0F; //0b0000_1111
 	DDRC = 0x00;
 	PCMSK1 |= 0x03;
 	PCICR |= (1 << PCIE1);
